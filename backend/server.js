@@ -29,9 +29,14 @@ app.use("/api/v1/auth", require("./routes/authRoutes"));
 app.use("/api/v1/inventory", require("./routes/inventoryRoutes"));
 app.use("/api/v1/analytics", require("./routes/analyticsRoutes"));
 app.use("/api/v1/admin", require("./routes/adminRoutes"));
+// just display its working
+app.get("/", (req, res) => {
+  res.send(`API Connected! Wohoo 🎉 and frontend URL is :- ${process.env.FRONTEND_URL}`);
+});
+
 
 //port
-const PORT = process.env.PORT || 8080;
+// const PORT = process.env.PORT || 8080;
 
 //listen
 // app.listen(PORT, () => {
