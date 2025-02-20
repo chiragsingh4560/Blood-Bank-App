@@ -4,16 +4,17 @@ const colors = require("colors");
 const morgan = require("morgan");
 const cors = require("cors");
 const connectDB = require("./config/db");
-//dot config
+
+// Load environment variables
 dotenv.config();
 
-//mongodb connection
+// Connect to MongoDB
 connectDB();
 
-//rest object
+// Create Express app
 const app = express();
 
-//middlewares
+// Middlewares
 app.use(express.json());
 app.use(
   cors({
@@ -23,25 +24,16 @@ app.use(
 );
 app.use(morgan("dev"));
 
-//routes
-// 1 test route
+// Routes
 app.use("/api/v1/auth", require("./routes/authRoutes"));
 app.use("/api/v1/inventory", require("./routes/inventoryRoutes"));
 app.use("/api/v1/analytics", require("./routes/analyticsRoutes"));
 app.use("/api/v1/admin", require("./routes/adminRoutes"));
-// just display its working
+
+// Root Route
 app.get("/", (req, res) => {
-  res.send(`API Connected! Wohoo 🎉 and frontend URL is :- ${process.env.FRONTEND_URL}`);
+  res.send(`API Connected! Wohoo 🎉 <br> Frontend URL: ${process.env.FRONTEND_URL || "Not Set"}`);
 });
 
-
-//port
-// const PORT = process.env.PORT || 8080;
-
-//listen
-// app.listen(PORT, () => {
-//   console.log(
-//     `Node Server Running In ${process.env.DEV_MODE} ModeOn Port ${process.env.PORT}`
-//       .bgBlue.white
-//   );
-// });
+// Export the app for Vercel
+module.exports = app;
