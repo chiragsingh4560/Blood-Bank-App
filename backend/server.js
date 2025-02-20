@@ -15,7 +15,12 @@ const app = express();
 
 //middlewares
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL, // Corrected spelling
+    credentials: true, // Corrected spelling
+  })
+);
 app.use(morgan("dev"));
 
 //routes
@@ -29,9 +34,9 @@ app.use("/api/v1/admin", require("./routes/adminRoutes"));
 const PORT = process.env.PORT || 8080;
 
 //listen
-app.listen(PORT, () => {
-  console.log(
-    `Node Server Running In ${process.env.DEV_MODE} ModeOn Port ${process.env.PORT}`
-      .bgBlue.white
-  );
-});
+// app.listen(PORT, () => {
+//   console.log(
+//     `Node Server Running In ${process.env.DEV_MODE} ModeOn Port ${process.env.PORT}`
+//       .bgBlue.white
+//   );
+// });
