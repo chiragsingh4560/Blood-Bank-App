@@ -17,8 +17,8 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL, // Corrected spelling
-    credentials: true, // Corrected spelling
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
   })
 );
 app.use(morgan("dev"));
